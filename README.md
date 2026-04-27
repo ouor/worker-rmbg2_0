@@ -7,6 +7,8 @@
 - **입력**: 이미지 1장 (data URI / http(s) URL / raw base64)
 - **출력**: 배경이 제거된 RGBA PNG 1장 (base64 data URI)
 
+> 운영 중인 엔드포인트의 클라이언트 사용법은 [**API.md**](./API.md)를 참고하세요.
+
 ---
 
 ## 요청 / 응답

@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "url_input",
+      "input": {
+        "image": "https://images.unsplash.com/photo-1517849845537-4d257902454a?w=512"
+      },
+      "timeout": 120000
+    },
+    {
+      "name": "data_uri_input",
+      "input": {
+        "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAABG0lEQVR4nOWZy23EMBBD6YeU50Pq2IK2jj1MOTnnnBJSwS6k0cei9a4GOKQpGYJ1/Pz+yRlkDjIHmYPMQeYgc5A5yBxkDjIHmfM1QvR8vN49iud331lHx8PcB9/jkhxdAlRZ7xvjaAyQtt4rBpe7V5sOl7tvVGMF9y2aLOI+rcw67nP6LOU+McX+KMFqr7921jYNnBNff9XEbRrwDnBOXz/lc/doYGWQOcgcZA4yB5mDdggQvf9GFRIFc/do4A4BYvoqirKJ2zSguSVE8aydGtCsEqJmSnUDozNEpX5mCY3LEPXKyT0wIkOkNPObuG+GyKo1fYV6ZYgGne3vyG5yS3mTe+JLQOYgc5A5yBxkDjIHmYPMQeZwtYFW/gH4tGELZeQOVQAAAABJRU5ErkJggg=="
+      },
+      "timeout": 120000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "allowedCudaVersions": [
+      "12.7",
+      "12.6",
+      "12.5",
+      "12.4",
+      "12.3",
+      "12.2",
+      "12.1"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "title": "RMBG-2.0 Background Remover",
+  "description": "Serverless background removal worker powered by BRIA RMBG-2.0 (BiRefNet). Returns an RGBA PNG with the predicted alpha matte.",
+  "type": "serverless",
+  "category": "image",
+  "iconUrl": "",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 20,
+    "gpuCount": 1,
+    "gpuIds": "ADA_24,AMPERE_24,AMPERE_48,ADA_48",
+    "allowedCudaVersions": [
+      "12.7",
+      "12.6",
+      "12.5",
+      "12.4",
+      "12.3",
+      "12.2",
+      "12.1"
+    ]
+  }
+}

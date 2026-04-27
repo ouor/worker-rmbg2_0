@@ -45,13 +45,15 @@
 
 ```jsonc
 {
-  "error": {
+  "errorInfo": {
     "code": "<string>",
     "message": "<human-readable>",
     "detail": "<optional, technical>"
   }
 }
 ```
+
+> **`errorInfo`인 이유**: RunPod SDK가 핸들러 반환의 top-level `error` 키를 가로채 시스템 필드로 분리하는데, 플랫폼 API가 그 필드를 클라이언트로 전달하지 않습니다. 그래서 응답이 빈 채로 도착합니다. `errorInfo` 키로 두면 정상적으로 `output` 안에 담겨 전달됩니다.
 
 ---
 
@@ -115,7 +117,7 @@ with open("no_bg.png", "wb") as f:
 ```json
 {
   "output": {
-    "error": {
+    "errorInfo": {
       "code": "image_too_large",
       "message": "Downloaded image exceeds 25 MB."
     }
@@ -126,7 +128,7 @@ with open("no_bg.png", "wb") as f:
 ```json
 {
   "output": {
-    "error": {
+    "errorInfo": {
       "code": "image_fetch_failed",
       "message": "URL returned HTTP 404.",
       "detail": "NOT FOUND"

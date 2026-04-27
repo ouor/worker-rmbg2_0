@@ -264,11 +264,11 @@ def _encode_png_data_uri(image: Image.Image) -> str:
 def handler(job):
     job_input = job.get("input") or {}
     if not isinstance(job_input, dict):
-        return {"error": InvalidInputError("'input' must be an object.").to_dict()}
+        return {"errorInfo": InvalidInputError("'input' must be an object.").to_dict()}
 
     image_src = job_input.get("image")
     if image_src is None:
-        return {"error": InvalidInputError("Missing required field 'image'.").to_dict()}
+        return {"errorInfo": InvalidInputError("Missing required field 'image'.").to_dict()}
 
     try:
         image = _load_image(image_src)
@@ -276,11 +276,15 @@ def handler(job):
         return {"image": _encode_png_data_uri(result)}
     except WorkerError as exc:
         logger.warning("Handled error [%s]: %s", exc.code, exc.message)
-        return {"error": exc.to_dict()}
+        # NOTE: must NOT use the top-level key "error" — runpod-python's
+        # rp_job.run_job pops `error` from the handler return and the
+        # platform dispatcher does not forward it back in the runsync /
+        # status response, so the client would see no payload.
+        return {"errorInfo": exc.to_dict()}
     except Exception as exc:  # last-resort safety net
         logger.exception("Unhandled error")
         return {
-            "error": {
+            "errorInfo": {
                 "code": "internal_error",
                 "message": "Unhandled server error.",
                 "detail": f"{type(exc).__name__}: {exc}",

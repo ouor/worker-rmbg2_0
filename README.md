@@ -171,6 +171,32 @@ docker run --rm --gpus all worker-rmbg20
 
 빌드 시 모델 가중치가 이미지에 포함되므로 런타임에 추가 다운로드 없이 오프라인(`--network none`)에서도 동작합니다.
 
+### GitHub Actions 자동 배포
+
+`.github/workflows/docker-publish.yml`이 다음 조건에서 Docker Hub로 자동 빌드/푸시합니다:
+
+| 트리거 | 적용 태그 |
+|--------|-----------|
+| `main` 브랜치에 push | `:latest`, `:v1.0`, `:main-<short-sha>` |
+| `v*` 형태 git tag push (예: `v1.1`) | `:latest`, `:<tag>` |
+| 수동 실행 (Actions 탭 → Run workflow) | `:latest`, 입력한 버전 태그 |
+
+#### 필요한 GitHub Secrets
+저장소 Settings → Secrets and variables → Actions에서 등록:
+
+| 이름 | 값 |
+|------|-----|
+| `DOCKERHUB_USERNAME` | Docker Hub 사용자명 |
+| `DOCKERHUB_TOKEN` | Docker Hub PAT ([생성](https://hub.docker.com/settings/security)) |
+| `HF_TOKEN` | HuggingFace 액세스 토큰 (gated repo 다운로드용) |
+
+`gh` CLI 사용 시:
+```bash
+gh secret set DOCKERHUB_USERNAME --body "<username>"
+gh secret set DOCKERHUB_TOKEN --body "<dckr_pat_...>"
+gh secret set HF_TOKEN --body "$HF_TOKEN"
+```
+
 ---
 
 ## 아키텍처 메모
